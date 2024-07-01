@@ -1,0 +1,57 @@
+{% extends 'profil.html.twig' %}
+
+{% block title %}Profile{% endblock %}
+
+{% block body %}
+    <div class="container my-5">
+        <div class="text-center mb-4">
+            <h1 class="mb-3">My Profile</h1>
+            <p>Welcome to your profile settings page.</p>
+        </div>
+        <hr class="my-4">
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <h3>First Name:</h3> 
+                <p style="font-size: 16px;">{{ profil.firstName }}</p>
+            </div>
+            <div class="col-md-6">
+                <h3>Last Name:</h3>  
+                <p style="font-size: 16px;">{{ profil.lastName }}</p>
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <h3>Username:</h3> 
+                <p style="font-size: 16px;">{{ profil.username }}</p>
+            </div>
+            <div class="col-md-6">
+                <h3>Email:</h3>  
+                <p style="font-size: 16px;">{{ profil.email }}</p>
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <h3>Trad:</h3>  
+                <p style="font-size: 16px;">{{ profil.isTrad ? 'Yes' : 'No' }}</p>
+            </div>
+            <div class="col-md-6">
+                <h3>Created At:</h3> 
+                <p style="font-size: 16px;">{{ profil.createdAt ? profil.createdAt|date('Y-m-d H:i:s') : 'N/A' }}</p>
+            </div>
+        </div>
+        <h3>Languages:</h3>
+        <div class="row">
+            {% for userLanguage in userLanguages %}
+                <div class="col-md-3">
+                    <li style="font-size: 16px;">{{ userLanguage.language.langue }}</li>
+                </div>
+                {% if loop.index is divisible by(4) %}
+                    </div><div class="row">
+                {% endif %}
+            {% endfor %}
+        </div>
+        <div class="text-center mt-4">
+            <a class="btn btn-primary btn-lg" href="{{ url('app_profil_edit') }}">Edit</a>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,46 @@
+{% extends 'project.html.twig' %}
+
+{% block title %}Project{% endblock %}
+
+{% block body %}
+    <div class="container my-4">
+        <div class="bg-light p-4 rounded">
+            <h1 class="text-center">Project: {{ project.name }}</h1>
+        </div>
+
+        <div class="row mt-4 justify-content-center">
+            <div class="col-md-6">
+                <div class="bg-primary p-4 rounded text-center" style="background-color: rgba(0, 123, 255, 0.7);">
+                    <h2 class="text-white">Content</h2>
+                    <p class="text-white">{{ project.contenu }}</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-4 justify-content-center">
+            <div class="col-md-6">
+                <div class="bg-secondary p-4 rounded text-center" style="background-color: rgba(108, 117, 125, 0.7);">
+                    <h2 class="text-white">Sources</h2>
+                    <ul class="text-white">
+                        {% for source in sources %}
+                            <li>
+                                <strong>{{ source.nom }}</strong>: {{ source.description }}
+                            </li>
+                        {% else %}
+                            <li>No sources available for this project.</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-4 justify-content-center">
+            <div class="col-md-6 text-center">
+                <div class="bg-info p-4 rounded" style="background-color: rgba(23, 162, 184, 0.7);">
+                    <a class="btn btn-light me-2" href="{{ path('app_project_edit', {'id': project.id}) }}">Edit</a>
+                    <a class="btn btn-light" href="{{ path('app_project_index') }}">Back to List</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

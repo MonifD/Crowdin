@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Crowding{% endblock %}
+
+{% block stylesheets %}
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    margin: 0;
+    padding: 0;
+  }
+  .container {
+    text-align: center;
+    padding: 50px 20px;
+  }
+  h1 {
+    font-size: 3em;
+    color: #007BFF; /* Same color as the navbar */
+    margin-bottom: 0.5em;
+  }
+  p {
+    font-size: 1.2em;
+    color: #666;
+    line-height: 1.6em;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+</style>
+{% endblock %}
+
+{% block body %}
+<div class="container">
+  <h1>WELCOME TO CROWDING</h1>
+  <p>Crowding is a user-driven translation site. Here, you can be a simple user requesting translations or become a translator and offer your services. Join our community and help bridge language barriers!</p>
+</div>
+{% endblock %}

@@ -1,0 +1,115 @@
+Table users {
+  ID integer [primary key]
+  name varchar
+  is_translator boolean
+  user_languagesID integer [default: null]
+  created_at timestamp
+}
+
+Table languages {
+  ID integer [primary key]
+  name varchar
+}
+
+Ref: users.user_languagesID > user_languages.ID
+
+Table level {
+  ID integer [primary key]
+  name varchar
+  description varchar
+}
+
+Table projects {
+  ID integer [primary key]
+  name varchar [NOT NULL]
+  sub_project_1 integer
+  sub_project_2 integer
+  sub_project_3 integer
+  created_at timestamp
+  updated_at timestamp
+}
+
+Table sub_project {
+  ID integer [primary key]
+  sourcesID interger 
+  translation_ask_1 integer // ask to translate source to x language
+  translation_ask_2 integer // ask to translate source to y language
+  translation_ask_3 integer // ask to translate source to z language
+  response_1 integer // response to translation_ask_1 n°1 
+  response_2 integer // response to translation_ask_1 n°2 
+  response_3 integer // response to translation_ask_1 n°3
+  response_4 integer // response to translation_ask_2 n°1 
+  response_5 integer // response to translation_ask_2 n°2 
+  response_6 integer // response to translation_ask_3 n°1 
+  response_7 integer // response to translation_ask_3 n°2
+  response_8 integer // response to translation_ask_3 n°3 
+  response_9 integer // response to translation_ask_3 n°4
+  response_10 integer // can be empty if no response
+}
+
+Ref: projects.sub_project_1 > sub_project.ID
+Ref: projects.sub_project_2 > sub_project.ID
+Ref: projects.sub_project_3 > sub_project.ID
+Ref: sub_project.sourcesID > sources.ID
+Ref: sub_project.translation_ask_1 > languages.ID
+Ref: sub_project.translation_ask_2 > languages.ID
+Ref: sub_project.translation_ask_3 > languages.ID
+Ref: sub_project.response_1 > sources.ID
+Ref: sub_project.response_2 > sources.ID
+Ref: sub_project.response_3 > sources.ID
+Ref: sub_project.response_4 > sources.ID
+Ref: sub_project.response_5 > sources.ID
+Ref: sub_project.response_6 > sources.ID
+Ref: sub_project.response_7 > sources.ID
+Ref: sub_project.response_8 > sources.ID
+Ref: sub_project.response_9 > sources.ID
+Ref: sub_project.response_10 > sources.ID
+
+Table users_projects {
+  ID integer [primary key]
+  userID integer
+  projectID integer
+}
+
+Ref: users.ID > users_projects.userID
+Ref: projects.ID > users_projects.projectID
+
+Table sources {
+  ID integer [primary key]
+  userID integer [NOT NULL]
+  origin_langID integer
+  filename varchar
+  size integer
+  created_at timestamp
+  updated_at timestamp
+  type string // check if peoetry or mediacl or diplomatic etc ...
+}
+
+Ref: sources.userID > users.ID
+Ref: sources.origin_langID > languages.ID
+
+Table user_languages {
+  ID integer [primary key]
+  languageID_1 integer
+  languageLevelID_1 integer
+  languageID_2 integer
+  languageLevelID_2 integer
+  languageID_3 integer
+  languageLevelID_3 integer
+  languageID_4 integer
+  languageLevelID_4 integer
+  languageID_5 integer
+  languageLevelID_5 integer
+}
+
+Ref: languages.ID > user_languages.languageID_1
+Ref: level.ID > user_languages.languageLevelID_1
+Ref: languages.ID > user_languages.languageID_2
+Ref: level.ID > user_languages.languageLevelID_2
+Ref: languages.ID > user_languages.languageID_3
+Ref: level.ID > user_languages.languageLevelID_3
+Ref: languages.ID > user_languages.languageID_4
+Ref: level.ID > user_languages.languageLevelID_4
+Ref: languages.ID > user_languages.languageID_5
+Ref: level.ID > user_languages.languageLevelID_5
+

@@ -1,0 +1,52 @@
+{% extends 'profil.html.twig' %}
+
+{% block title %}Profile{% endblock %}
+
+{% block body %}
+    <h1>User Profile</h1>
+
+    {{ form_start(form) }}
+        {{ form_row(form.first_name) }}
+        {{ form_row(form.last_name) }}
+        {{ form_row(form.username) }}
+        {{ form_row(form.email) }}
+        
+        {{ form_row(form.is_trad) }}
+        
+        <div id="languages-container" style="display: none;">
+            <div class="row">
+                {% for child in form.languages %}
+                    <div class="col-md-3">
+                        {{ form_row(child) }}
+                    </div>
+                    {% if loop.index % 4 == 0 %}
+                        </div><div class="row">
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+
+    {{ form_end(form) }}
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var isTradCheckbox = document.getElementById('{{ form.is_trad.vars.id }}');
+            var languagesContainer = document.getElementById('languages-container');
+
+            function toggleLanguages() {
+                if (isTradCheckbox.checked) {
+                    languagesContainer.style.display = 'block';
+                } else {
+                    languagesContainer.style.display = 'none';
+                }
+            }
+
+            // Initialize display based on the current state of the checkbox
+            toggleLanguages();
+
+            // Add event listener for changes
+            isTradCheckbox.addEventListener('change', toggleLanguages);
+        });
+    </script>
+{% endblock %}
+
